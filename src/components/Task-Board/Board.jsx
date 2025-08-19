@@ -1,9 +1,12 @@
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import Column from "./Column";
+import { useDataContext } from "../../context/DataContext";
 
-const columns = ["Todo", "In Progress", "Done"];
+const columns = ["Todo", "In Progress", "Finish"];
 
-export default function Board({ tasks, setTasks, filter, search, darkMode }) {
+function Board() {
+  const { tasks, setTasks, darkMode } = useDataContext();
+
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -16,7 +19,10 @@ export default function Board({ tasks, setTasks, filter, search, darkMode }) {
   };
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd} style={{ background: darkMode ? "yellow" : "pink" }}>
+    <DragDropContext
+      onDragEnd={handleDragEnd}
+      style={{ background: darkMode ? "#1a1a1a" : "#f5f5f5", transition: "background 0.3s" }}
+    >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
         {columns.map((col) => (
           <Droppable key={col} droppableId={col}>
@@ -24,16 +30,11 @@ export default function Board({ tasks, setTasks, filter, search, darkMode }) {
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-md"
+                style={{ background: darkMode ? "#1e1e1e" : "#fff", color: darkMode ? "#fff": "#000" }}
+                className={`rounded-lg p-3 shadow-md border`}
               >
-                <h2 className="text-lg font-semibold mb-2">{col}</h2>
-                <Column
-                  status={col}
-                  tasks={tasks}
-                  setTasks={setTasks}
-                  filter={filter}
-                  search={search}
-                />
+                <h2 className="text-lg font-semibold mb-2 text-center mb-7">{col}</h2>
+                <Column status={col} />
                 {provided.placeholder}
               </div>
             )}
@@ -43,3 +44,5 @@ export default function Board({ tasks, setTasks, filter, search, darkMode }) {
     </DragDropContext>
   );
 }
+
+export default Board;

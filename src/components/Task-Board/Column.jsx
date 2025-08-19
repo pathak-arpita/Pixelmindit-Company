@@ -1,9 +1,12 @@
-import TaskCard from "./TaskCard";
-import TaskForm from "./TaskForm";
+import { useDataContext } from "../../context/DataContext";
+import TaskCard from "./About-Task/TaskCard";
+import TaskForm from "./About-Task/TaskForm";
 import { Draggable } from "@hello-pangea/dnd";
 import { isToday } from "date-fns";
 
-export default function Column({ status, tasks, setTasks, filter, search }) {
+export default function Column({ status }) {
+    const { tasks, setTasks, filter, search } = useDataContext();
+
     const filtered = tasks.filter((task) => {
         if (task.status !== status) return false;
 

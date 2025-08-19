@@ -9,23 +9,30 @@ function SearchBar() {
             <TextField
                 variant="outlined"
                 size="small"
-                placeholder="Search..."
+                placeholder="Search by task title..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 sx={{
                     width: "100%",
                     maxWidth: 550,
-                    input: { color: darkMode ? "#fff" : "#000" },
+                    input: {
+                        color: darkMode ? "#080808" : "#000",
+                        backgroundColor: darkMode ? "#fff" : "#f5f5f5",
+                    },
                     "& .MuiOutlinedInput-root": {
                         "& fieldset": {
-                            borderColor: darkMode ? "#aaa" : "#ccc",
+                            borderColor: darkMode ? "#aaa" : "#020202ff",
                         },
                         "&:hover fieldset": {
                             borderColor: darkMode ? "#fff" : "#555",
                         },
+                        "&.Mui-focused fieldset": {
+                            borderColor: darkMode ? "#aaa" : "#ccc",
+                        },
                     },
                 }}
             />
+
         </div>
     );
 }

@@ -18,7 +18,7 @@ function Navbar() {
   };
 
   return (
-    <div className="p-4 border-b" style={{ backgroundColor: darkMode ? "#2c2c2c" : "#fff" }} >
+    <div className="p-4 border-b" style={{ backgroundColor: darkMode ? "#2c2c2c" : "#fff",transition: "background-color 0.9s" }} >
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:px-8">
         <div className="flex-1 flex items-center md:justify-start justify-between">
           <h1 className="text-2xl font-bold" style={{ color: darkMode ? "#fff" : "#000" }} >

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDataContext } from "../../../context/DataContext";
+import { PlusCircle, X } from "lucide-react";
 
 function TaskForm({ status }) {
-  const { tasks, setTasks, darkMode } = useDataContext();
+  const { setTasks, darkMode } = useDataContext();
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ title: "", description: "", priority: "Low", dueDate: "" });
 
@@ -75,9 +76,22 @@ function TaskForm({ status }) {
               className={`flex-1 p-1 border rounded appearance-none pr-4 ${textColor} focus:outline-none focus:border-gray-400`}
             />
           </div>
-          <div className="flex gap-2">
-            <button type="submit" className="flex-1 py-1 rounded text-white bg-[#379837]">Add</button>
-            <button type="button" onClick={() => setOpen(false)} className="flex-1 bg-[#505051] text-white py-1 rounded">Cancel</button>
+          <div className="flex gap-2 mt-5 justify-evenly">
+            <button
+              type="submit"
+              className="flex justify-center items-center gap-1 bg-[#379837] text-white px-3 py-1 w-[35%] rounded hover:bg-green-900 transition cursor-pointer"
+            >
+              <PlusCircle size={24} />
+              Add
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="flex justify-center items-center gap-1 bg-[#505051] text-white px-3 py-1 w-[35%] rounded hover:bg-gray-300 transition cursor-pointer"
+            >
+              <X size={24} />
+              Cancel
+            </button>
           </div>
         </form>
       ) : (

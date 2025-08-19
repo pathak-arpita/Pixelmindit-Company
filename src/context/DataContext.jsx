@@ -13,7 +13,7 @@ export function DataProvider({ children }) {
     }, [darkMode]);
 
     // Filters
-    const [filter, setFilter] = useState("all");
+    const [filter, setFilter] = useState("All Task");
     const [search, setSearch] = useState("");
 
     // Tasks with persistence

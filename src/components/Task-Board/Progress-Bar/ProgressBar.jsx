@@ -1,4 +1,3 @@
-import React from "react";
 import { useDataContext } from "../../../context/DataContext";
 
 const ProgressBar = () => {

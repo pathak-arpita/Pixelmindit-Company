@@ -83,9 +83,11 @@ function TaskForm({ status }) {
       ) : (
         <button
           onClick={() => setOpen(true)}
-          className="w-full py-1 rounded text-white bg-[#379837]"
+          className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-dashed py-2 text-sm 
+    ${darkMode ? "border-white bg-[#444444] text-white hover:bg-gray-800" : "border-black-400 bg-white text-gray-700 hover:bg-gray-100"}`}
+          type="button"
         >
-          + Add Task
+          +<span>Add task</span>
         </button>
       )}
     </div>

@@ -3,14 +3,13 @@ import Column from "./Column";
 import ProgressBar from "./Progress-Bar/ProgressBar";
 import { useDataContext } from "../../context/DataContext";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { ColumnIcon } from "./icons";
 
 const columns = ["Todo", "In Progress", "Finish"];
 const priorityOrder = { Low: 1, Medium: 2, High: 3 };
 
 function Board() {
   const { tasks, setTasks, darkMode } = useDataContext();
-  const [expandedColumn, setExpandedColumn] = useState(null);
-
   const [columnFilters, setColumnFilters] = useState({
     Todo: "Default",
     "In Progress": "Default",
@@ -72,15 +71,17 @@ function Board() {
                   background: darkMode ? "#1e1e1e" : "#fff",
                   color: darkMode ? "#fff" : "#000",
                   boxShadow: darkMode
-                    ? "0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4)" : "0 0 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(81, 81, 81, 0.4)",
+                    ? "0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4)"
+                    : "0 0 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(81, 81, 81, 0.4)",
                   transition: "all 0.3s",
-                  minHeight: expandedColumn === col ? "420px" : "auto",
                 }}
                 className="rounded-2xl p-4 shadow-lg flex flex-col"
               >
-                {/* Header with filter */}
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">{col}</h2>
+                  <div className="flex items-center gap-2">
+                    <ColumnIcon />
+                    <h2 className="text-xl font-semibold flex">{col}</h2>
+                  </div>
                   <div className="relative flex items-center">
                     <select
                       value={columnFilters[col]}
@@ -103,7 +104,6 @@ function Board() {
                 </div>
 
                 <Column status={col} tasks={getSortedTasks(col)} />
-
                 {provided.placeholder}
               </div>
             )}

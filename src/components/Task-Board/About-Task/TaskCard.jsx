@@ -26,28 +26,35 @@ function TaskCard({ task }) {
             type="text"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="w-full p-1 border rounded"
+            className="w-full p-1 border rounded focus:outline-none"
           />
           <textarea
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="w-full p-1 border rounded"
+            className="w-full p-1 border rounded focus:outline-none"
           />
-          <select
-            value={form.priority}
-            onChange={(e) => setForm({ ...form, priority: e.target.value })}
-            className="w-full p-1 border rounded"
-          >
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-          </select>
+          <div className="flex items-center  relative">
+            <select
+              value={form.priority}
+              onChange={(e) => setForm({ ...form, priority: e.target.value })}
+              className="flex-1 p-1 border cursor-pointer rounded appearance-none pr-6 focus:outline-none focus:border-gray-400 "
+            >
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
+            <div className="absolute right-4 pointer-events-none">
+              <svg className={`w-4 h-4 ${darkMode ? "text-white" : "text-black"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
           <input
             type="date"
             value={form.dueDate}
             style={{ colorScheme: darkMode && "dark", cursor: "pointer" }}
             onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
-            className="w-full p-1 border rounded"
+            className="w-full p-1 border rounded focus:outline-none"
           />
           <div className="flex gap-2">
             <button type="submit" className="flex-1 bg-[#379837] text-white py-1 rounded">

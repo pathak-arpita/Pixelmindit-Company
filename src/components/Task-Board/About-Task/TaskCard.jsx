@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Pencil, Trash2, Check, X } from "lucide-react"
 import { useDataContext } from "../../../context/DataContext";
 
 function TaskCard({ task, isLast }) {
@@ -34,7 +35,7 @@ function TaskCard({ task, isLast }) {
       className={[
         "rounded-2xl border border-black/5 p-4 shadow-sm transition-shadow hover:shadow-md",
         darkMode ? "bg-gray-700 text-white" : "bg-white text-black",
-        !isLast ? "mb-[3%]" : "", 
+        !isLast ? "mb-[3%]" : "",
       ].join(" ")}
       style={{
         boxShadow: darkMode
@@ -48,18 +49,16 @@ function TaskCard({ task, isLast }) {
             type="text"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className={`w-full p-2 border rounded focus:outline-none ${
-              darkMode ? "text-white bg-gray-600" : "text-black bg-white"
-            }`}
+            className={`w-full p-2 border rounded focus:outline-none ${darkMode ? "text-white bg-gray-600" : "text-black bg-white"
+              }`}
           />
           <textarea
             value={form.description}
             onChange={(e) =>
               setForm({ ...form, description: e.target.value })
             }
-            className={`w-full p-2 border rounded focus:outline-none ${
-              darkMode ? "text-white bg-gray-600" : "text-black bg-white"
-            }`}
+            className={`w-full p-2 border rounded focus:outline-none ${darkMode ? "text-white bg-gray-600" : "text-black bg-white"
+              }`}
           />
           <div className="flex items-center relative">
             <select
@@ -67,9 +66,8 @@ function TaskCard({ task, isLast }) {
               onChange={(e) =>
                 setForm({ ...form, priority: e.target.value })
               }
-              className={`flex-1 p-2 border cursor-pointer rounded appearance-none pr-6 focus:outline-none focus:border-gray-400 ${
-                darkMode ? "text-white bg-gray-600" : "text-black bg-white"
-              }`}
+              className={`flex-1 p-2 border cursor-pointer rounded appearance-none pr-6 focus:outline-none focus:border-gray-400 ${darkMode ? "text-white bg-gray-600" : "text-black bg-white"
+                }`}
             >
               <option>Low</option>
               <option>Medium</option>
@@ -77,9 +75,8 @@ function TaskCard({ task, isLast }) {
             </select>
             <div className="absolute right-4 pointer-events-none">
               <svg
-                className={`w-4 h-4 ${
-                  darkMode ? "text-white" : "text-black"
-                }`}
+                className={`w-4 h-4 ${darkMode ? "text-white" : "text-black"
+                  }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -98,22 +95,23 @@ function TaskCard({ task, isLast }) {
             value={form.dueDate}
             style={{ colorScheme: darkMode && "dark", cursor: "pointer" }}
             onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
-            className={`w-full p-2 border rounded focus:outline-none ${
-              darkMode ? "text-white bg-gray-600" : "text-black bg-white"
-            }`}
+            className={`w-full p-2 border rounded focus:outline-none ${darkMode ? "text-white bg-gray-600" : "text-black bg-white"
+              }`}
           />
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-3 justify-evenly">
             <button
               type="submit"
-              className="flex-1 bg-[#379837] text-white py-1 rounded"
+              className="flex justify-center items-center gap-1 bg-[#379837] text-white px-3 py-1 w-[35%] rounded hover:bg-green-900 transition cursor-pointer"
             >
+              <Check size={24} />
               Save
             </button>
             <button
               type="button"
               onClick={() => setEditing(false)}
-              className="flex-1 bg-[#505051] text-white py-1 rounded"
+              className="flex justify-center items-center gap-1 bg-[#505051] text-white px-3 py-1 w-[35%] rounded hover:bg-gray-300 transition cursor-pointer"
             >
+              <X size={24} />
               Cancel
             </button>
           </div>
@@ -122,26 +120,23 @@ function TaskCard({ task, isLast }) {
         <>
           <div className="flex items-center gap-2">
             <h3
-              className={`text-[15px] font-medium ${
-                darkMode ? "text-white" : "text-black"
-              }`}
+              className={`text-[15px] font-medium ${darkMode ? "text-white" : "text-black"
+                }`}
             >
               {task.title}
             </h3>
           </div>
 
           <p
-            className={`mt-1 text-sm line-clamp-2 ${
-              darkMode ? "text-gray-400" : "text-slate-600"
-            }`}
+            className={`mt-1 text-sm line-clamp-2 ${darkMode ? "text-gray-400" : "text-slate-600"
+              }`}
           >
             {task.description}
           </p>
 
           <div
-            className={`mt-3 flex items-center justify-between text-xs ${
-              darkMode ? "text-gray-300" : "text-slate-500"
-            }`}
+            className={`mt-3 flex items-center justify-between text-xs ${darkMode ? "text-gray-300" : "text-slate-500"
+              }`}
           >
             <div className="flex items-center gap-1">
               <span
@@ -160,17 +155,19 @@ function TaskCard({ task, isLast }) {
             </time>
           </div>
 
-          <div className="flex gap-2 mt-3">
+          <div className="flex gap-2 mt-5 justify-evenly">
             <button
               onClick={() => setEditing(true)}
-              className="flex-1 bg-yellow-500 text-white py-0 rounded"
+              className="flex justify-center items-center gap-1 bg-yellow-500 text-white px-3 py-1 w-[35%] rounded hover:bg-yellow-900 transition cursor-pointer"
             >
+              <Pencil size={20} />
               Edit
             </button>
             <button
               onClick={handleDelete}
-              className="flex-1 bg-red-500 text-white py-1 rounded"
+              className="flex justify-center items-center gap-1 bg-red-500 text-white px-3 py-1 w-[35%] rounded hover:bg-red-900 transition cursor-pointer"
             >
+              <Trash2 size={20} />
               Delete
             </button>
           </div>

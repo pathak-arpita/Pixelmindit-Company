@@ -76,14 +76,14 @@ function TaskForm({ status }) {
             />
           </div>
           <div className="flex gap-2">
-            <button type="submit" className="flex-1 py-1 rounded text-white bg-green-500">Add</button>
-            <button type="button" onClick={() => setOpen(false)} className="flex-1 bg-gray-400 text-white py-1 rounded">Cancel</button>
+            <button type="submit" className="flex-1 py-1 rounded text-white bg-[#379837]">Add</button>
+            <button type="button" onClick={() => setOpen(false)} className="flex-1 bg-[#505051] text-white py-1 rounded">Cancel</button>
           </div>
         </form>
       ) : (
         <button
           onClick={() => setOpen(true)}
-          className="w-full py-1 rounded text-white bg-green-500"
+          className="w-full py-1 rounded text-white bg-[#379837]"
         >
           + Add Task
         </button>

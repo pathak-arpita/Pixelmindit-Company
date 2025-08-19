@@ -1,13 +1,14 @@
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
-import Column from "./Column";
-import { useDataContext } from "../../context/DataContext";
 import { useState } from "react";
+import Column from "./Column";
+import ProgressBar from "./Progress-Bar/ProgressBar";
+import { useDataContext } from "../../context/DataContext";
+import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 
 const columns = ["Todo", "In Progress", "Finish"];
 
 function Board() {
-   const { tasks, setTasks, darkMode, search } = useDataContext();
-  const [expandedColumn, setExpandedColumn] = useState(null); 
+  const { tasks, setTasks, darkMode, search } = useDataContext();
+  const [expandedColumn, setExpandedColumn] = useState(null);
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -22,6 +23,7 @@ function Board() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
+      <ProgressBar />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
         {columns.map((col) => (
           <Droppable key={col} droppableId={col}>
@@ -33,7 +35,7 @@ function Board() {
                   background: darkMode ? "#1e1e1e" : "#fff",
                   color: darkMode ? "#fff" : "#000",
                   transition: "all 0.3s",
-                  minHeight: expandedColumn === col ? "400px" : "auto", 
+                  minHeight: expandedColumn === col ? "400px" : "auto",
                 }}
                 className="rounded-lg p-3 shadow-md border flex flex-col"
               >

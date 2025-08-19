@@ -6,7 +6,7 @@ function TaskCard({ task }) {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(task);
 
-  if (!task) return null; 
+  if (!task) return null;
 
   const handleDelete = () => {
     setTasks(prev => prev.filter(t => t.id !== task.id));
@@ -45,14 +45,15 @@ function TaskCard({ task }) {
           <input
             type="date"
             value={form.dueDate}
+            style={{ colorScheme: darkMode && "dark", cursor: "pointer" }}
             onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
             className="w-full p-1 border rounded"
           />
           <div className="flex gap-2">
-            <button type="submit" className="flex-1 bg-green-500 text-white py-1 rounded">
+            <button type="submit" className="flex-1 bg-[#379837] text-white py-1 rounded">
               Save
             </button>
-            <button type="button" onClick={() => setEditing(false)} className="flex-1 bg-gray-900 text-white py-1 rounded">
+            <button type="button" onClick={() => setEditing(false)} className="flex-1 bg-[#505051] text-white py-1 rounded">
               Cancel
             </button>
           </div>

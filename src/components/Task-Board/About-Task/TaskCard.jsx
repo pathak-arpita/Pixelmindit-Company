@@ -19,7 +19,9 @@ function TaskCard({ task }) {
   };
 
   return (
-    <div className={`p-2 rounded mb-2 shadow ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-200 text-black'}`}>
+    <div
+      className={`p-2 rounded mb-2 ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-200 text-black'}`}
+      style={{ boxShadow: darkMode ? "2px 1px 6px rgba(252, 251, 244, 0.8)" : "2px 1px 6px rgba(67, 67, 67, 0.8)" }}>
       {editing ? (
         <form onSubmit={handleSave} className="space-y-2">
           <input

@@ -1,16 +1,19 @@
 import { useState } from "react";
+import { useDataContext } from "../../../context/DataContext";
 
-export default function TaskCard({ task, setTasks }) {
+export default function TaskCard() {
+  const { tasks, setTasks, darkMode } = useDataContext();
+
   const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState(task);
+  const [form, setForm] = useState(tasks);
 
   const handleDelete = () => {
-    setTasks((prev) => prev.filter((t) => t.id !== task.id));
+    setTasks((prev) => prev.filter((t) => t.id !== tasks.id));
   };
 
   const handleSave = (e) => {
     e.preventDefault();
-    setTasks((prev) => prev.map((t) => (t.id === task.id ? form : t)));
+    setTasks((prev) => prev.map((t) => (t.id === tasks.id ? form : t)));
     setEditing(false);
   };
 
@@ -46,15 +49,15 @@ export default function TaskCard({ task, setTasks }) {
           />
           <div className="flex gap-2">
             <button type="submit" className="flex-1 bg-green-500 text-white py-1 rounded">Save</button>
-            <button type="button" onClick={() => setEditing(false)} className="flex-1 bg-gray-400 text-white py-1 rounded">Cancel</button>
+            <button type="button" onClick={() => setEditing(false)} className="flex-1 bg-gray-900 text-white py-1 rounded">Cancel</button>
           </div>
         </form>
       ) : (
         <>
-          <h3 className="font-bold">{task.title}</h3>
-          <p className="text-sm">{task.description}</p>
-          <p className="text-xs">Priority: {task.priority}</p>
-          <p className="text-xs">Due: {task.dueDate}</p>
+          <h3 className="font-bold">{tasks.title}</h3>
+          <p className="text-sm">{tasks.description}</p>
+          <p className="text-xs">Priority: {tasks.priority}</p>
+          <p className="text-xs">Due: {tasks.dueDate}</p>
           <div className="flex gap-2 mt-2">
             <button
               onClick={() => setEditing(true)}

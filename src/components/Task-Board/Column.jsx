@@ -20,7 +20,7 @@ export default function Column({ status }) {
 
     return (
         <div>
-            <TaskForm status={status} setTasks={setTasks} />
+            <TaskForm status={status} />
             {filtered.map((task, index) => (
                 <Draggable draggableId={task.id} index={index} key={task.id}>
                     {(provided) => (
@@ -29,7 +29,7 @@ export default function Column({ status }) {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                         >
-                            <TaskCard task={task} setTasks={setTasks} />
+                            <TaskCard />
                         </div>
                     )}
                 </Draggable>

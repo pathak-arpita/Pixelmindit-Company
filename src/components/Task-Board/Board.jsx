@@ -6,7 +6,7 @@ import { useState } from "react";
 const columns = ["Todo", "In Progress", "Finish"];
 
 function Board() {
-  const { tasks, setTasks, darkMode } = useDataContext();
+   const { tasks, setTasks, darkMode, search } = useDataContext();
   const [expandedColumn, setExpandedColumn] = useState(null); 
 
   const handleDragEnd = (result) => {
@@ -39,7 +39,7 @@ function Board() {
               >
                 <h2 className="text-lg font-semibold text-center mb-3">{col}</h2>
 
-                <Column status={col}/>
+                <Column status={col} />
 
                 {provided.placeholder}
               </div>

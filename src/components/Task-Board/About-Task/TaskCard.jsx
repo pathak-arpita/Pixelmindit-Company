@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDataContext } from "../../../context/DataContext";
 
-export default function TaskCard({ task }) {
+function TaskCard({ task }) {
   const { tasks, setTasks, darkMode } = useDataContext();
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(task);
@@ -62,7 +62,7 @@ export default function TaskCard({ task }) {
           <h3 className="font-bold">Title : {task.title}</h3>
           <p className="text-sm">Description : {task.description}</p>
           <p className="text-sm">Priority: {task.priority}</p>
-          <p className="text-sm">Due: {task.dueDate}</p>
+          <p className="text-sm">Due Date: {task.dueDate}</p>
           <div className="flex gap-2 mt-2">
             <button onClick={() => setEditing(true)} className="flex-1 bg-yellow-500 text-white py-1 rounded">
               Edit
@@ -76,3 +76,5 @@ export default function TaskCard({ task }) {
     </div>
   );
 }
+
+export default TaskCard;

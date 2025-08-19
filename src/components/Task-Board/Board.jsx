@@ -6,14 +6,16 @@ import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 
 const columns = ["Todo", "In Progress", "Finish"];
 
+const priorityOrder = { Low: 1, Medium: 2, High: 3 };
+
 function Board() {
-  const { tasks, setTasks, darkMode, search } = useDataContext();
+  const { tasks, setTasks, darkMode } = useDataContext();
   const [expandedColumn, setExpandedColumn] = useState(null);
 
   const [columnFilters, setColumnFilters] = useState({
-    Todo: "All",
-    "In Progress": "All",
-    Finish: "All",
+    Todo: "Default",
+    "In Progress": "Default",
+    Finish: "Default",
   });
 
   const handleDragEnd = (result) => {
@@ -29,6 +31,32 @@ function Board() {
 
   const handleFilterChange = (col, value) => {
     setColumnFilters((prev) => ({ ...prev, [col]: value }));
+  };
+
+  const getSortedTasks = (col) => {
+    const filtered = tasks.filter((task) => task.status === col);
+
+    if (columnFilters[col] === "LowToHigh") {
+      return [...filtered].sort((a, b) => {
+        if (priorityOrder[a.priority] === priorityOrder[b.priority]) {
+          return new Date(a.dueDate) - new Date(b.dueDate);
+        }
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      });
+    }
+
+    if (columnFilters[col] === "HighToLow") {
+      return [...filtered].sort((a, b) => {
+        if (priorityOrder[a.priority] === priorityOrder[b.priority]) {
+          return new Date(a.dueDate) - new Date(b.dueDate);
+        }
+        return priorityOrder[b.priority] - priorityOrder[a.priority];
+      });
+    }
+
+    return [...filtered].sort(
+      (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+    );
   };
 
   return (
@@ -51,17 +79,15 @@ function Board() {
               >
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-lg font-semibold">{col}</h2>
-
                   <div className="relative flex items-center">
                     <select
                       value={columnFilters[col]}
                       onChange={(e) => handleFilterChange(col, e.target.value)}
-                      className="border rounded py-1 pl-2 pr-6 text-sm focus:outline-none appearance-none w-auto"
+                      className="border rounded py-1 pl-2 pr-8 text-sm focus:outline-none appearance-none w-auto"
                     >
-                      <option value="All">All</option>
-                      <option value="High">High</option>
-                      <option value="Medium">Medium</option>
-                      <option value="Low">Low</option>
+                      <option value="Default">By Priority</option>
+                      <option value="LowToHigh">Low to High</option>
+                      <option value="HighToLow">High to Low</option>
                     </select>
                     <svg
                       className={`w-4 h-4 absolute right-2 pointer-events-none ${darkMode ? "text-white" : "text-black"}`}
@@ -72,9 +98,10 @@ function Board() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
-
                 </div>
-                <Column status={col} priorityFilter={columnFilters[col]} />
+                 
+                <Column status={col} tasks={getSortedTasks(col)} />
+
                 {provided.placeholder}
               </div>
             )}

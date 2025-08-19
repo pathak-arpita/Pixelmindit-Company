@@ -11,13 +11,19 @@ const ProgressBar = () => {
 
     return (
         <div className="flex items-center justify-center mt-5 w-full">
-            <span className={`mr-3 font-semibold ${darkMode ? "text-gray-200" : "text-white-700"}`}>
+            <span className={`mr-3 font-semibold ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
                 ProgressBar
             </span>
-            <div className="relative w-[70%] bg-gray-300 h-5 rounded overflow-hidden">
-                <div className="h-full transition-all flex items-center justify-center font-bold"
-                    style={{ width: `${percentage}%`, backgroundColor: "#379837", color: darkMode ? "#fff" : "#000" }}>
-                    {Math.round(percentage)}%
+            <div className="relative w-[70%] bg-gray-300 h-5 rounded overflow-hidden" style={{border: `1.5px solid ${darkMode ? "#fff" : "#000"}`,}}>
+                <div
+                    className="h-full transition-all flex items-center justify-center font-bold"
+                    style={{
+                        width: `${percentage}%`,
+                        backgroundColor: "#379837",
+                        color: darkMode ? "#fff" : "#000",
+                    }}
+                >
+                    {percentage > 0 && `${Math.round(percentage)}%`}
                 </div>
             </div>
         </div>

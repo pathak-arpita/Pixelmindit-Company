@@ -18,13 +18,12 @@ Follow these steps to get the project up and running on your local machine:
 3.  **Start the Development Server:**
     To **start the application in development mode**, execute:
     `npm run dev`
-    Then, open your web browser and go to `http://localhost:3000` to view the app.
+    Then, open your web browser and go to `http://localhost:5173` to view the app.
 
 4.  **Create a Production Build:**
     If you want to **create a production-ready build** of the application, first run:
     `npm run build`
-    After the build is complete, you can serve the optimized app by running:
-    `npm start`
+
 
 <br><br>
     
@@ -34,8 +33,8 @@ Follow these steps to get the project up and running on your local machine:
 Here is a list of the key features implemented in this application:
 
 ### Task Management
-* **Adding Tasks:** You can add new tasks with a **title** and a **description**.
-* **Drag-and-Drop:** Tasks can be easily moved between the three columns ("To Do," "In Progress," and "Done") using **drag-and-drop** functionality.
+* **Adding Tasks:** You can add new tasks with a **title** , **description** ,**Priority** & **Due Date**.
+* **Drag-and-Drop:** Tasks can be easily moved between the three columns ("To Do," "In Progress," and "Finish") using **drag-and-drop** functionality.
 * **Task Details & Editing:** Each task has properties for its **title**, **description**, **priority** (Low, Medium, High), and **due date**. You can **edit** these details and also **delete** tasks.
 
 ### Data Persistence
@@ -46,7 +45,7 @@ Here is a list of the key features implemented in this application:
     * All tasks
     * Only high-priority tasks
     * Tasks due today
-* **Sorting:** Within each column, you can **sort** tasks by their **due date** or **priority**.
+* **Sorting:** Within each column, you can **sort** tasks by their **priority**.
 
 ### Extra Features
 * **Dark Mode:** You can toggle between **light and dark modes**. Your preference is saved in local storage.
@@ -76,6 +75,11 @@ One of the main challenges was implementing the drag-and-drop feature, as I had 
 Another challenge was effectively managing the state for all task-related operations, including adding, editing, and deleting tasks.
 
 * **Challenge:** The application's state needed to be a single source of truth that could be easily updated from different parts of the application. For example, when a user edits a task, the change needs to be reflected not only in the task's details but also in the correct column on the board.
-* **Solution:** I used a centralized state management approach. The main `App` component held the primary task data (an object where keys were column IDs and values were arrays of tasks). All functions for adding, editing, and deleting tasks were defined in this main component and passed down as props to the child components (e.g., the `Column` or `Task` components). When an action occurred in a child component (like a click on the edit button), it called the corresponding function passed down from the parent, which updated the central state. This ensured data consistency across the entire application.
+* **Solution:**  I utilized the React Context API to implement a centralized state management system.
+The DataProvider component acts as the central hub, holding the state for tasks, dark mode, filters, and the search query.
+
+It uses the useState hook to manage this data and the useEffect hook to ensure the state for both tasks and dark mode is persisted in the browser's localStorage.
+
+Any component wrapped within this provider can then access the state and the functions to update it by simply calling the useDataContext hook. This approach makes the application's data flow predictable and eliminates the need to pass props from parent to child components, resulting in cleaner and more maintainable code.
 
 This approach helped maintain a predictable and reliable flow of data, making it easier to manage complex interactions like dragging a task and then immediately editing its details.

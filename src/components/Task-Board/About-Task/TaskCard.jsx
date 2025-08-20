@@ -7,6 +7,8 @@ function TaskCard({ task, isLast }) {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(task);
 
+  const today = new Date().toISOString().split("T")[0];
+
   if (!task) return null;
 
   const handleDelete = () => {
@@ -93,6 +95,7 @@ function TaskCard({ task, isLast }) {
           <input
             type="date"
             value={form.dueDate}
+            min={today}
             style={{ colorScheme: darkMode && "dark", cursor: "pointer" }}
             onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
             className={`w-full p-2 border rounded focus:outline-none ${darkMode ? "text-white bg-gray-600" : "text-black bg-white"
